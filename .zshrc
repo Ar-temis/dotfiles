@@ -1,5 +1,6 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+if [ "$TMUX" = "" ]; then tmux; fi
+# # If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/android-studio/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -76,33 +77,17 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-alias vpn='/opt/cisco/secureclient/bin/vpn -s < /home/artemis/Developer/vpn_conf/vpn.conf'
-alias dkuvpn='/opt/cisco/secureclient/bin/vpn -s < /home/artemis/Developer/vpn_conf/dku_vpn.conf'
-alias vpnd='/opt/cisco/secureclient/bin/vpn disconnect' 
-alias vpns='/opt/cisco/secureclient/bin/vpn -s < /home/artemis/Developer/vpn_conf/status.conf'
-alias chatdku='cd /home/artemis/Developer/Chatdku'
-
-alias sshchatdku='ssh Ar-temis@10.200.14.82'
-alias sshserver1='ssh Ar-temis@10.201.8.233'
-alias sshserver2='ssh Ar-temis@10.201.8.114'
-
-# alias python = python3
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export MANPAGER="lvim +Man!"
-export MANWIDTH=999
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='vim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='nvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -118,3 +103,19 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+alias vpn='/opt/cisco/secureclient/bin/vpn -s < /opt/cisco/secureclient/bin/vpn.conf'
+alias vpnd='/opt/cisco/secureclient/bin/vpn disconnect'
+alias vpns='/opt/cisco/secureclient/bin/vpn -s < /opt/cisco/secureclient/bin/status.conf'
+alias dkuvpn='/opt/cisco/secureclient/bin/vpn -s < /opt/cisco/secureclient/bin/dku_vpn.conf'
+ 
+alias venv='source ./.venv/bin/activate'
+alias sshchatdku='ssh Ar-temis@10.200.14.82'
+alias sshserver1='ssh Ar-temis@10.201.8.233'
+alias sshserver2='ssh Ar-temis@10.201.8.114'
+
+eval "$(starship init zsh)"
+. "/home/artemis/.deno/env"
