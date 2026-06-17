@@ -1,0 +1,6 @@
+Args
+DKU
+Temuulen
+env
+python3
+usr
