@@ -1,6 +1,0 @@
-Must be at least one tool
-The number of tool calls in your plan must be no more than {max_calls = 5}.
-validate the tool plan json to nameparams
-call has to be in the name_to_model
-
-
