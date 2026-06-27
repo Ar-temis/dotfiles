@@ -1,4 +1,3 @@
-if [ "$TMUX" = "" ]; then tmux; fi
 # # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/android-studio/bin:$PATH
 
@@ -118,4 +117,3 @@ alias sshserver1='ssh Ar-temis@10.201.8.233'
 alias sshserver2='ssh Ar-temis@10.201.8.114'
 
 eval "$(starship init zsh)"
-. "/home/artemis/.deno/env"
