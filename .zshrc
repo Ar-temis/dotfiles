@@ -1,4 +1,4 @@
-# # If you come from bash you might have to change your $PATH.
+# If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/android-studio/bin:$PATH
 
 # Path to your Oh My Zsh installation.
@@ -114,6 +114,10 @@ alias venv='source ./.venv/bin/activate'
 alias sshchatdku='ssh Ar-temis@10.200.14.82'
 alias sshserver1='ssh Ar-temis@10.201.8.233'
 alias sshserver2='ssh Ar-temis@10.201.8.114'
+
+# Shell tool aliases
+alias ff='fzf'
+
 # yazi thingy
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
