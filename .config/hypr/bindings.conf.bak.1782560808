@@ -1,0 +1,55 @@
+# Application bindings
+bindd = SUPER, RETURN, Terminal, exec, uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)"
+bindd = SUPER ALT, RETURN, Tmux, exec, uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" bash -c "tmux attach || tmux new -s Work"
+bindd = SUPER, B, Browser, exec, omarchy-launch-browser
+bindd = SUPER, E, File manager, exec, uwsm-app -- nautilus --new-window
+bindd = SUPER SHIFT, B, Browser (private), exec, omarchy-launch-browser --private
+bindd = SUPER SHIFT, M, Music, exec, omarchy-launch-or-focus spotify
+bindd = SUPER SHIFT ALT, M, Music TUI, exec, omarchy-launch-or-focus-tui cliamp
+bindd = SUPER SHIFT, N, Editor, exec, omarchy-launch-editor
+bindd = SUPER SHIFT, D, Docker, exec, omarchy-launch-tui lazydocker
+bindd = SUPER SHIFT, O, Obsidian, exec, omarchy-launch-or-focus ^obsidian$ "uwsm-app -- obsidian"
+bindd = SUPER SHIFT, SLASH, Passwords, exec, uwsm-app -- 1password
+
+# If your web app url contains #, type it as ## to prevent hyprland treating it as a comment
+bindd = SUPER SHIFT, A, ChatGPT, exec, omarchy-launch-webapp "https://chatgpt.com"
+bindd = SUPER SHIFT, E, Email, exec, omarchy-launch-webapp "https://outlook.office.com/mail"
+bindd = SUPER SHIFT, Y, YouTube, exec, omarchy-launch-webapp "https://youtube.com/"
+
+# Add extra bindings
+# bind = SUPER SHIFT, R, exec, alacritty -e ssh your-server
+
+# Overwrite existing bindings, like putting Omarchy Menu on Super + Space
+# unbind = SUPER, SPACE
+# bindd = SUPER, SPACE, Omarchy menu, exec, omarchy-menu
+
+# Logitech MX Keys
+# bind = SUPER SHIFT, S, exec, omarchy-capture-screenshot      # Print Screen Button
+# bind = SUPER, H, exec, voxtype record toggle                 # Dictation Button
+# bind = SUPER, PERIOD, exec, omarchy-launch-walker -m symbols # Emoji Button
+
+# i3-style window management
+bindd = SUPER ALT, H, Hardware menu, exec, omarchy-menu hardware
+bindd = SUPER ALT, K, Show key bindings, exec, omarchy-menu-keybindings
+
+bindd = SUPER, H, Focus left, movefocus, l
+unbind = SUPER, J
+bindd = SUPER, J, Focus down, movefocus, d
+unbind = SUPER, K
+bindd = SUPER, K, Focus up, movefocus, u
+unbind = SUPER, L
+bindd = SUPER, L, Focus right, movefocus, r
+
+unbind = SUPER CTRL, H
+bindd = SUPER CTRL, H, Resize left, resizeactive, -100 0
+bindd = SUPER CTRL, J, Resize down, resizeactive, 0 100
+bindd = SUPER CTRL, K, Resize up, resizeactive, 0 -100
+unbind = SUPER CTRL, L
+bindd = SUPER CTRL, L, Resize right, resizeactive, 100 0
+
+bindd = SUPER SHIFT, H, Move window left, movewindow, l
+bindd = SUPER SHIFT, J, Move window down, movewindow, d
+bindd = SUPER SHIFT, K, Move window up, movewindow, u
+bindd = SUPER SHIFT, L, Move window right, movewindow, r
+
+bindd = SUPER, code:51, Cycle workspace layout, exec, ~/.config/hypr/cycle-layout

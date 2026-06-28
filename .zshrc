@@ -105,7 +105,6 @@ source $ZSH/oh-my-zsh.sh
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 alias vpn='/opt/cisco/secureclient/bin/vpn -s < /opt/cisco/secureclient/bin/vpn.conf'
 alias vpnd='/opt/cisco/secureclient/bin/vpn disconnect'
 alias vpns='/opt/cisco/secureclient/bin/vpn -s < /opt/cisco/secureclient/bin/status.conf'
@@ -115,5 +114,12 @@ alias venv='source ./.venv/bin/activate'
 alias sshchatdku='ssh Ar-temis@10.200.14.82'
 alias sshserver1='ssh Ar-temis@10.201.8.233'
 alias sshserver2='ssh Ar-temis@10.201.8.114'
-
+# yazi thingy
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
 eval "$(starship init zsh)"
