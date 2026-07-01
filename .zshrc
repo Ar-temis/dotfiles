@@ -127,3 +127,12 @@ function y() {
 	command rm -f -- "$tmp"
 }
 eval "$(starship init zsh)"
+
+. "$HOME/.local/share/../bin/env"
+
+# Add JBang to environment
+alias j!=jbang
+export PATH="$HOME/.jbang/bin:$PATH"
+
+# opencode
+export PATH=/home/artemis/.opencode/bin:$PATH
