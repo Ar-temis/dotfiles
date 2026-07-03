@@ -136,3 +136,5 @@ export PATH="$HOME/.jbang/bin:$PATH"
 
 # opencode
 export PATH=/home/artemis/.opencode/bin:$PATH
+
+. "$HOME/.cargo/env"

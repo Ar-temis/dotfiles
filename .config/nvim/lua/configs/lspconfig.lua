@@ -29,6 +29,7 @@ local servers = {
 	"ts_ls",
 	"lua_ls",
 	"harper_ls",
+	"rust_analyzer",
 }
 vim.lsp.config("harper_ls", {
 	filetypes = { "markdown" },
@@ -60,6 +61,16 @@ vim.lsp.config("harper_ls", {
 			ignoredLintsPath = "",
 			excludePatterns = {},
 		},
+	},
+})
+
+local mason_rust_analyzer = vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer"
+
+vim.lsp.config("rust_analyzer", {
+	cmd = { vim.fn.executable(mason_rust_analyzer) == 1 and mason_rust_analyzer or "rust-analyzer" },
+	cmd_env = {
+		PATH = vim.fn.expand("~/.cargo/bin") .. ":" .. vim.env.PATH,
+		RUSTUP_TOOLCHAIN = "stable",
 	},
 })
 
