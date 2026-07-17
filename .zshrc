@@ -117,6 +117,7 @@ alias sshserver2='ssh Ar-temis@10.201.8.114'
 
 # Shell tool aliases
 alias ff='fzf'
+alias lg='lazygit'
 
 # yazi thingy
 function y() {
