@@ -47,12 +47,6 @@ input {
   }
 }
 
-# External ASUS ROG Strix Impact mouse
-device {
-  name = asus-rog-strix-impact
-  sensitivity = 0.1
-}
-
 # Scroll nicely in the terminal
 windowrule = match:class (Alacritty|kitty|foot), scroll_touchpad 1.5
 windowrule = match:class com.mitchellh.ghostty, scroll_touchpad 0.2
