@@ -63,3 +63,9 @@ o.bind("SUPER + SHIFT + L", "Move window right", hl.dsp.window.move({ direction 
 
 -- Cycle the tiling layout of the active workspace (SUPER + backslash).
 o.bind("SUPER + code:51", "Cycle workspace layout", (os.getenv("HOME") or "") .. "/.config/hypr/cycle-layout")
+
+-- Agent ---------------------------------------------------------------------
+
+-- Was: Agent (omarchy-agent, which starts claude with bypassPermissions)
+hl.unbind("SUPER + SHIFT + CTRL + A")
+o.bind("SUPER + SHIFT + CTRL + A", "Agent", (os.getenv("HOME") or "") .. "/.local/bin/claude-agent")

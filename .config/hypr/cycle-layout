@@ -1,7 +1,14 @@
 #!/bin/bash
 
+# Cycle the active workspace through all four tiling layouts.
+# Modelled on omarchy-hyprland-workspace-layout-toggle, which only flips
+# between dwindle and scrolling.
+
 ACTIVE_WORKSPACE=$(hyprctl activeworkspace -j | jq -r '.id')
+[[ $ACTIVE_WORKSPACE =~ ^-?[0-9]+$ ]] || exit 1
 CURRENT_LAYOUT=$(hyprctl activeworkspace -j | jq -r '.tiledLayout')
+LAYOUTS_DIR="$HOME/.local/state/omarchy/workspace-layouts"
+LAYOUT_FILE="$LAYOUTS_DIR/$ACTIVE_WORKSPACE.lua"
 
 case "$CURRENT_LAYOUT" in
   dwindle) NEW_LAYOUT=master ;;
@@ -11,5 +18,16 @@ case "$CURRENT_LAYOUT" in
   *) NEW_LAYOUT=dwindle ;;
 esac
 
-hyprctl keyword workspace "$ACTIVE_WORKSPACE, layout:$NEW_LAYOUT"
-notify-send -u low "Workspace layout set to $NEW_LAYOUT"
+RULE="hl.workspace_rule({ workspace = \"$ACTIVE_WORKSPACE\", layout = \"$NEW_LAYOUT\" })"
+
+# Persist the rule so default/hypr/workspace-layouts.lua restores it on reload.
+mkdir -p "$LAYOUTS_DIR"
+printf '%s\n' "$RULE" >"$LAYOUT_FILE"
+
+# `hyprctl keyword` is rejected by the Lua config parser; eval is the way in.
+if ! hyprctl eval "$RULE" | grep -qx ok; then
+  omarchy-notification-send -u critical -g 󱂬 "Failed to set workspace layout to $NEW_LAYOUT"
+  exit 1
+fi
+
+omarchy-notification-send -g 󱂬 "Workspace layout set to $NEW_LAYOUT"

@@ -28,30 +28,39 @@ require("default.hypr.toggles")
 -- Add any other personal Hyprland configuration below.
 o.window("org.gnome.Calendar", { float = true, center = true })
 
+-- Gamepad/wheel input arrives on evdev joystick nodes, which libinput (and
+-- therefore Hyprland's idle clock) ignores entirely, so a long stint with only
+-- controller input reads as "idle" and the screensaver fires mid-game. Omarchy's
+-- idle service respects inhibitors, so an idle-inhibit rule on the game window
+-- holds it off.
+--
+-- Matched generically rather than per-game: Proton assigns every Steam title a
+-- `steam_app_<appid>` class (Assetto Corsa is steam_app_244210, DiRT Rally 2.0
+-- is steam_app_690790), gamescope covers the Big Picture session, and non-Steam
+-- Wine titles keep their `.exe` class. New games are covered with no edit here.
+--
+-- Mode is "focus", not "fullscreen": "fullscreen" only inhibits while the window
+-- is both fullscreen and in front, so it misses windowed games, and "focus"
+-- still lets the machine lock normally when a game is left running in the
+-- background on another workspace.
+o.window("^(steam_app_[0-9]+|gamescope|.+\\.exe)$", {
+  idle_inhibit = "focus",
+})
+
 -- csgo-vulkan-fix (hyprpm plugin).
--- Unlike the old .conf format, Lua rejects config keys that no loaded plugin
--- has registered, so this has to wait until the plugin is actually there.
--- autostart.lua runs `hyprpm reload -n`, which loads plugins and reloads the
--- config; on that pass the keys exist and the settings below apply.
-local function plugin_loaded(name)
-  for _, plugin in ipairs(hl.get_loaded_plugins() or {}) do
-    if (plugin.name or ""):find(name, 1, true) then
-      return true
-    end
-  end
+-- hl.plugin.csgo_vulkan_fix is nil until the plugin is loaded, and Lua rejects
+-- config keys no loaded plugin has registered, so both halves stay behind the
+-- guard. autostart.lua runs `hyprpm reload -n`, which loads plugins and reloads
+-- the config; on that pass the settings below apply.
+if hl.plugin.csgo_vulkan_fix ~= nil then
+  -- Add apps with { app = initialClass, w = width, h = height }.
+  hl.plugin.csgo_vulkan_fix.vkfix_app({ app = "cs2", w = 1920, h = 1440 })
 
-  return false
-end
-
-if plugin_loaded("csgo-vulkan-fix") then
   hl.config({
     plugin = {
       csgo_vulkan_fix = {
         -- Whether to fix the mouse position. A select few apps might be wonky with this.
         fix_mouse = true,
-
-        -- Add apps with ["vkfix-app"] = "initialClass, width, height"
-        ["vkfix-app"] = "cs2, 1920, 1440",
       },
     },
   })
