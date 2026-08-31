@@ -1,1 +1,6 @@
 lazy-lock.json
+
+# Omarchy leaves timestamped backups behind after upgrades and refreshes
+*.bak
+*.bak.*
+*.omarchy-upgrade-to-*

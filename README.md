@@ -10,8 +10,18 @@ This repo is intended to be cloned directly into the home directory as `~/dotfil
 - Terminal: `ghostty`, `kitty`
 - Editor: `nvim`
 - File manager: `yazi`
+- Window manager: `hypr`
+- Multiplexer: `tmux`
+- Omarchy: `omarchy/shell.json` (bar layout, idle timers), `omarchy/shell.toml`
+  (font size), `omarchy/defaults/agent`, `omarchy/themes/mytheme`
 - Tools: `harper-ls`, `opencode`
 - Assets: `Pictures`
+
+Omarchy files that are deliberately *not* tracked: anything under
+`~/.local/state/omarchy/` (machine state, rewritten by `omarchy theme set`),
+the stock `.sample` hooks and `extensions/omarchy-menu.jsonc` (shipped by the
+omarchy package), and hooks installed by omarchy migrations such as
+`hooks/post-update.d/setup-agent.hook`.
 
 ## Install
 
