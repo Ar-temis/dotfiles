@@ -67,5 +67,5 @@ o.bind("SUPER + code:51", "Cycle workspace layout", (os.getenv("HOME") or "") ..
 -- Agent ---------------------------------------------------------------------
 
 -- Was: Agent (omarchy-agent, which starts claude with bypassPermissions)
-hl.unbind("SUPER + SHIFT + CTRL + A")
-o.bind("SUPER + SHIFT + CTRL + A", "Agent", (os.getenv("HOME") or "") .. "/.local/bin/claude-agent")
+-- hl.unbind("SUPER + SHIFT + CTRL + A")
+-- o.bind("SUPER + SHIFT + CTRL + A", "Agent", (os.getenv("HOME") or "") .. "/.local/bin/claude-agent")
