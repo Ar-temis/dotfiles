@@ -6,9 +6,9 @@
 local M = {}
 
 M.base46 = {
-	theme = "wombat",
+	theme = "carbonfox",
 
-	transparency = false,
+	transparency = true,
 	hl_override = {
 		Comment = { italic = true },
 		["@comment"] = { italic = true },
