@@ -13,6 +13,10 @@ o.bind("SUPER + E", "File manager", { launch = "nautilus --new-window" })
 hl.unbind("SUPER + SHIFT + B")
 o.bind("SUPER + SHIFT + B", "Browser (private)", { omarchy = "browser --private" })
 
+-- Was: ChatGPT
+hl.unbind("SUPER + SHIFT + A")
+o.bind("SUPER + SHIFT + A", "Claude", { webapp = "https://claude.ai" })
+
 -- Was: Email (hey.com)
 hl.unbind("SUPER + SHIFT + E")
 o.bind("SUPER + SHIFT + E", "Email", { webapp = "https://outlook.office.com/mail" })
@@ -34,6 +38,8 @@ o.bind("SUPER + ALT + H", "Hardware menu", "omarchy-menu toggle hardware")
 -- Was: Tmux keybindings
 hl.unbind("SUPER + ALT + K")
 o.bind("SUPER + ALT + K", "Show key bindings", "omarchy-menu-keybindings")
+
+o.bind("SUPER + CTRL + ALT + K", "Tmux keybindings", "omarchy-menu-tmux-keybindings")
 
 -- i3-style window management ------------------------------------------------
 

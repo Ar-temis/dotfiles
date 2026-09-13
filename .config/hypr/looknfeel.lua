@@ -2,8 +2,11 @@
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
 hl.config({
-  decoration = {
-    -- Use round window corners.
-    rounding = 8,
-  },
+	decoration = {
+		-- Use round window corners.
+		rounding = 8,
+	},
+	general = {
+		border_size = 5,
+	},
 })

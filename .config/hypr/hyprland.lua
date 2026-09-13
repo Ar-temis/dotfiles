@@ -65,3 +65,27 @@ if hl.plugin.csgo_vulkan_fix ~= nil then
     },
   })
 end
+
+-- VA-API driver override for this hybrid Intel + NVIDIA laptop.
+--
+-- Omarchy's default/hypr/nvidia.lua sets LIBVA_DRIVER_NAME=nvidia whenever it
+-- detects an NVIDIA GPU with GSP firmware. Its detector (omarchy-hw-nvidia-gsp)
+-- only asks whether such a GPU exists in the machine, not whether it is the one
+-- driving the display -- and here those differ: the only panel, eDP-2, hangs off
+-- card2 (PCI 0000:00:02.0, Intel Iris Xe), so Hyprland renders and scans out on
+-- the iGPU while the RTX 3070 Ti sits idle on the PRIME offload side.
+--
+-- With LIBVA_DRIVER_NAME=nvidia, Chromium/Brave decode video through
+-- libva-nvidia-driver on the dGPU and then hand the resulting buffers to a GL
+-- context living on Intel. The cross-GPU import fails, and the GPU process
+-- floods with:
+--   eglCreateImage failed with 0x00003009   (EGL_BAD_MATCH)
+--   OzoneImageBacking::ProduceSkiaGanesh failed to create GL representation
+-- which is the black-video-then-blank-window behaviour: the surface dies on the
+-- next reconfigure, so moving or resizing the window empties it while Hyprland
+-- keeps drawing the border.
+--
+-- Pointing VA-API at the Intel driver (intel-media-driver's iHD_drv_video.so)
+-- puts decode on the same GPU as the compositor and the errors disappear.
+-- Set last so it wins over the default from default.hypr.nvidia.
+hl.env("LIBVA_DRIVER_NAME", "iHD")
